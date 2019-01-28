@@ -7,22 +7,22 @@ export const addIdea = (initialValues) => (
     }
 )
 export const deleteIdea = id => {
-    console.log('ACTION ==' + id)
     return {
         type: types.DELETE_IDEA,
-            payload: id
+        payload: id
     }
 }
    
 
 
-export const editIdea = ({id, title, description}) => (
+export const editIdea = ({id, title, description,dateCreated}) => (
     { 
         type: types.EDIT_IDEA, 
         payload: {
            id,
            title,
-           description  
+           description,
+           dateCreated  
         }
     }
 )

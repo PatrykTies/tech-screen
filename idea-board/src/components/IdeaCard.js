@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import * as actions from 'actions'
 import ShowOrEdit from 'components/ShowOrEdit';
 import { editIdea } from './../actions/index';
+import dateParser from 'utils/dateParser';
 
 
 
@@ -16,12 +17,13 @@ class IdeaCard extends Component{
         const editedIdea = {
             id: this.props.idea.id,
             title: this.props.idea.title || '',
-            description: this.props.idea.title || ''
+            description: this.props.idea.title || '',
+            dateCreated: Date.now()
         }
 
-        const editIdea2 = { ...editedIdea, [inputName]: input}
+        const editedProp = { ...editedIdea, [inputName]: input}
       
-        this.props.editIdea(editIdea2)  
+        this.props.editIdea(editedProp)  
     }
 
     render(){
@@ -34,7 +36,7 @@ class IdeaCard extends Component{
                 <br />
                 <ShowOrEdit name='description' label={idea.description || ''} sendValueUp={this.getInputValue}/>
                 <br />
-                {idea.dateCreated}
+                {dateParser(idea.dateCreated)}
                 <button className='delete-btn' 
                     onClick={this.props.handleDelete.bind(null,idea.id)}>
                     [X]

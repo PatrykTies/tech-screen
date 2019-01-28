@@ -13,8 +13,6 @@ class FilterButton extends Component{
     }
 
     setFilter = () => {
-        console.log(this.filter);
-        
         this.props.setVisibilityFilter(this.filter)
     }
 
@@ -23,7 +21,7 @@ class FilterButton extends Component{
             <button
                 className={!!this.active ? 'active': 'disabled'}
                 style={{ cursor: 'pointer' }}
-                onClick={() => this.setFilter}
+                onClick={() => this.setFilter()}
             >
                 {this.props.children}
             </button>

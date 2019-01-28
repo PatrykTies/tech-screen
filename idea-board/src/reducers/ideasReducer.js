@@ -5,6 +5,7 @@ import {
 } from 'actions/types'
 
 import dateParser from 'utils/dateParser'
+import { bindActionCreators } from '../../../../../../AppData/Local/Microsoft/TypeScript/3.2/node_modules/redux';
 
 const now = new Date()
 
@@ -13,8 +14,7 @@ const initialState = [
     {
         id: 0,
         title: 'Add title here...',
-        description: 'Write about your idea...',
-        dateCreated: dateParser(now)
+        description: 'Write about your idea...'      
     }
 ]
 
@@ -22,21 +22,23 @@ export default function ideasReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_IDEA:
             return [
-                ...state,
+                ...state,         
                 {
                     id: state.reduce((maxId, idea) => Math.max(idea.id, maxId), -1) + 1,
-                    title: action.payload.title,
-                    description: action.payload.description,
-                    dateCreated: dateParser(now)
+                    ...action.payload
                 }
+                // {
+                //     id: state.reduce((maxId, idea) => Math.max(idea.id, maxId), -1) + 1,
+                //     title: action.payload.title,
+                //     description: action.payload.description,
+                //     dateCreated: action.payload.dateCreated
+                // }
             ]
         case EDIT_IDEA:
             return state.map(idea=>
                 idea.id === action.payload.id ?
                 {...idea, 
-                    title: action.payload.title, 
-                    description: action.payload.description,
-                    dateCreated: dateParser(now)
+                    ...action.payload
                 } 
                 :
                 idea

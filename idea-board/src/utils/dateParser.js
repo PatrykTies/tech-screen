@@ -1,13 +1,15 @@
-export default function (objToday){
+export default function dateParser(timestamp){
 
-    let dayOfMonth = objToday.getDate(),
+    let objToday = new Date(timestamp),
+    dayOfMonth = objToday.getDate(),
     curMonth = objToday.getMonth() + 1,
     curYear = objToday.getFullYear(),
     curHour = objToday.getHours() > 12 ? objToday.getHours() - 12 : (objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours()),
     curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
+    curSecond = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
     curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
 
-    const today = `${curHour}:${curMinute}${curMeridiem} - ${dayOfMonth}/${curMonth}/${curYear}`
+    const parsedDateTime = `${curHour}:${curMinute}:${curSecond}${curMeridiem} - ${dayOfMonth}/${curMonth}/${curYear}`
     
-    return today
+    return parsedDateTime
 }

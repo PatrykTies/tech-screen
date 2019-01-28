@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import IdeaCard from 'components/IdeaCard';
 import { deleteIdea } from 'actions'
+import { getVisibleIdeas } from 'selectors'
+import { visibilityFilter } from 'reducers/visibilityFilter';
 
 class IdeasList extends Component {
 
@@ -10,9 +12,9 @@ class IdeasList extends Component {
         this.props.deleteIdea(id)
     }
 
-    renderIdeas = (ideas) => 
+    renderIdeas = (filteredIdeas) => 
         (
-            ideas.map(idea => 
+            filteredIdeas.map(idea => 
                 <section key={idea.id}>
                     <IdeaCard idea={idea} handleDelete={this.handleDelete}/>  
                 </section>    
@@ -21,14 +23,13 @@ class IdeasList extends Component {
     
 
     render() {
-        const {ideas} = this.props
+        const { filteredIdeas, visibilityFilter } = this.props
         return (
         <div>
-            {!!ideas && 
-                <ul>
-                    {this.renderIdeas(ideas)}
-                </ul>
-            }
+            <h1>{visibilityFilter}</h1>
+            <ul>
+                {this.renderIdeas(filteredIdeas)}
+            </ul>
         </div>
     )
   }
@@ -36,19 +37,21 @@ class IdeasList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        ideas: state.ideas
+        filteredIdeas: getVisibleIdeas(state),
+        visibilityFilter: state.visibilityFilter
     }
 }
 
 
 IdeasList.propTypes = {
-    ideas: PropTypes.arrayOf(PropTypes.shape({
+    filteredIdeas: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string,
         description: PropTypes.string,
         dateCreated: PropTypes.string
     }).isRequired).isRequired,
-    deleteIdea: PropTypes.func.isRequired
+    deleteIdea: PropTypes.func.isRequired,
+    visibilityFilter: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps, {deleteIdea})(IdeasList);

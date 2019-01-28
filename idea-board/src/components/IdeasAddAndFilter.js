@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import * as actions from 'actions'
 import * as types from 'actions/types'
 import FilterButton from 'components/FilterButton'
+import {timeStamp} from 'utils/dateParser'
+
 
 const FILTER_TITLES = {
     [types.BY_DATE]: 'BY DATE',
@@ -12,11 +14,13 @@ const FILTER_TITLES = {
 
 class IdeasAddAndFilter extends Component {
 
-    handleClick = () => {  
+    handleClick = () => { 
+       
         //THIS STARTING INPUT DEFAULT TEXT FOR EACH IDEA CARD
         const initialValues = { 
             title: 'Add title here...', 
-            description: 'Write about your idea...' 
+            description: 'Write about your idea...',
+            dateCreated: Date.now()
         }
         this.props.addIdea(initialValues)
     }

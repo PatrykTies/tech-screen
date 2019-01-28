@@ -27,14 +27,21 @@ class ShowOrEdit extends Component {
             editing: false 
         })
         this.props.sendValueUp(this.state.value, this.props.name)
-        //dispatch action to send edited payload , reducer adds timestamp
+        
     }
+
+    /*  140 chars sample
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text every.
+    */ 
 
     render(){
         return (
             <div>
                 {this.state.editing ? 
-                    <input type='text'
+                    <textarea type='text'
+                        rows={4}
+                        cols={20}
+                        maxLength={140}
                         value={this.state.value}
                         onBlur={this.handleEditingDone}
                         onChange={this.handleEditingChange}
