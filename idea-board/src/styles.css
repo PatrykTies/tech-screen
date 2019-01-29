@@ -18,7 +18,7 @@ body {
    width: 1400px;
    margin: 10px auto;
    display: flex;
-   flex-wrap: wrap; 
+   flex-wrap: wrap;
    
 }
 
@@ -83,6 +83,7 @@ body {
     border: none;
     color: white;
     background: #e77267;
+    font-weight: bold;
 }
 /*CCSTranstion on-enter on-leave*/
 .fade-appear{

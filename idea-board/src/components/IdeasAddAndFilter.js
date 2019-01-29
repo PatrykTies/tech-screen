@@ -85,6 +85,4 @@ IdeasAddAndFilter.propTypes = {
 
 export default connect(null, actions)(IdeasAddAndFilter);
 
-{/* <FilterButton filter={filter}>
-    {FILTER_TITLES[filter]}
-</FilterButton> */}
+

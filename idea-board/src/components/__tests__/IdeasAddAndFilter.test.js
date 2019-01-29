@@ -21,12 +21,12 @@ describe('IdeasAddAndFilter component', ()=>{
             wrappedComponent.unmount();
         });
 
-        it('has three buttons ', () => {
-            expect(wrappedComponent.find('button').length).toEqual(3)
+        it('has one FAB button at first render', () => {
+            expect(wrappedComponent.find('button').length).toEqual(1)
         });
     });
 
-    describe('add-button in IdeasAddAndFilter', ()=>{
+    describe('FAB button in IdeasAddAndFilter', ()=>{
         let wrappedComponent;
         beforeEach(() => {
             wrappedComponent = mount(
@@ -40,10 +40,10 @@ describe('IdeasAddAndFilter component', ()=>{
         afterEach(() => {
             wrappedComponent.unmount();
         });
-        it('when add-button is pressed onClick event fire with ADD action type', ()=>{
-            expect(wrappedComponent.find('button.add-button').length).toEqual(1)
-            wrappedComponent.find('button.add-button').simulate('click')
-            expect(wrappedComponent.find('li').length).toEqual(2)
+        it('when FAB is pressed onClick event fire with toggleMenu()', ()=>{
+            expect(wrappedComponent.find('button.fab fab-icon-menu').length).toEqual(1)
+            wrappedComponent.find('button.fab fab-icon-menu').simulate('click')
+            expect(wrappedComponent.find('button').length).toEqual(5)
         });
     });
 });

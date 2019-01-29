@@ -4,12 +4,7 @@ import {
     EDIT_IDEA
 } from 'actions/types'
 
-import dateParser from 'utils/dateParser'
-import { bindActionCreators } from '../../../../../../AppData/Local/Microsoft/TypeScript/3.2/node_modules/redux';
-
-const now = new Date()
-
-//THIS IS SO THAT ON APP LOAD, USER CAN SEE 1 DEFAULT CARD ALREADY VISIBLE FOR HIM
+//THIS IS SO THAT ON APP LOAD, USER CAN SEE 1 DEFAULT CARD ALREADY VISIBLE FOR A USER
 const initialState = [
     {
         id: 0,
@@ -27,12 +22,7 @@ export default function ideasReducer(state = initialState, action) {
                     id: state.reduce((maxId, idea) => Math.max(idea.id, maxId), -1) + 1,
                     ...action.payload
                 }
-                // {
-                //     id: state.reduce((maxId, idea) => Math.max(idea.id, maxId), -1) + 1,
-                //     title: action.payload.title,
-                //     description: action.payload.description,
-                //     dateCreated: action.payload.dateCreated
-                // }
+               
             ]
         case EDIT_IDEA:
             return state.map(idea=>

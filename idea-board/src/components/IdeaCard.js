@@ -3,14 +3,12 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import * as actions from 'actions'
 import ShowOrEdit from 'components/ShowOrEdit';
-import { editIdea } from './../actions/index';
 import dateParser from 'utils/dateParser';
 
 
 
 class IdeaCard extends Component{
 
-    
 
     getInputValue = (input, inputName) =>{   
         
@@ -48,7 +46,13 @@ class IdeaCard extends Component{
 }
 
 IdeaCard.propTypes = {
-    idea: PropTypes.object.isRequired
+    idea: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string,
+        description: PropTypes.string,
+        dateCreated: PropTypes.number
+    }).isRequired,
+    editIdea: PropTypes.func.isRequired
 }
 
 export default connect(null, actions)(IdeaCard);

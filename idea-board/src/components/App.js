@@ -17,4 +17,3 @@ class App extends Component {
 
 export default App;
 
-// <IdeasList ideas={this.state.ideas} filter={this.state.activeFilter}/>

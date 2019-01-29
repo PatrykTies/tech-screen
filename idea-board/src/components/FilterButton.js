@@ -31,7 +31,8 @@ class FilterButton extends Component{
 FilterButton.propTypes = {
     children: PropTypes.node.isRequired,
     filter: PropTypes.string.isRequired,
-    active: PropTypes.bool.isRequired
+    active: PropTypes.bool.isRequired,
+    setVisibilityFilter: PropTypes.func.isRequired,
 }
 
 

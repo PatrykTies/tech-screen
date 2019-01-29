@@ -68,7 +68,7 @@ IdeasList.propTypes = {
         id: PropTypes.number.isRequired,
         title: PropTypes.string,
         description: PropTypes.string,
-        dateCreated: PropTypes.string
+        dateCreated: PropTypes.number
     }).isRequired).isRequired,
     deleteIdea: PropTypes.func.isRequired,
     visibilityFilter: PropTypes.string.isRequired
