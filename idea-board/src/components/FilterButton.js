@@ -19,8 +19,7 @@ class FilterButton extends Component{
     render(){
         return (
             <button
-                className={!!this.active ? 'active': 'disabled'}
-                style={{ cursor: 'pointer' }}
+                className='fab-icon-holder'
                 onClick={() => this.setFilter()}
             >
                 {this.props.children}

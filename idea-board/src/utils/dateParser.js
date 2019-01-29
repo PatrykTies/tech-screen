@@ -9,7 +9,7 @@ export default function dateParser(timestamp){
     curSecond = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
     curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
 
-    const parsedDateTime = `${curHour}:${curMinute}:${curSecond}${curMeridiem} - ${dayOfMonth}/${curMonth}/${curYear}`
+    const parsedDateTime = `${curHour}:${curMinute}:${curSecond}${curMeridiem} on ${dayOfMonth}/${curMonth}/${curYear}`
     
     return parsedDateTime
 }

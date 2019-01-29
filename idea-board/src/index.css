@@ -1,10 +1,254 @@
+*{
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    width: 100%;
+    
 }
 
+.header{
+    text-align: center;
+}
+
+/*CARDS LAYOUT > span added due to CSSTransitionGroup usage*/
+.main-wrapper > span{
+   width: 1400px;
+   margin: 10px auto;
+   display: flex;
+   flex-wrap: wrap; 
+   
+}
+
+/*CARD STYLING*/
+
+.card-wrapper{
+    height:450px;
+    width: 300px;
+    list-style-type: none;
+    box-shadow: 0px 0px 7px 3px gray;
+    margin: 10px;
+    text-align: center;
+   
+    border: 10px solid white;  
+    background-image: linear-gradient(to bottom right,rgb(101, 101, 248), skyblue);
+}
+.content-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    
+}
+.text-editing{
+    background: rgba(0,0,0,0.2);
+    color: white;
+    max-height: 250px;
+    
+}
+.title-wrapper{
+    vertical-align: center;
+    height: 50px;
+    background: #e77267;
+    color: white;
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+}
+
+.description-wrapper{
+    display: flex;
+    align-self: center;
+    max-width: 300px;
+    border-bottom: 1px solid;
+    height: 250px;
+    font-family: 'Noto Sans', sans-serif;
+    align-items: center; 
+   
+}
+.description-label{
+    max-width: 250px;
+    word-wrap: break-word;
+}
+
+.timestamp-wrapper{
+    margin-top:0px;
+    margin-bottom: 37px;
+    color: white;
+}
+.delete-btn{
+    width: 100%;
+    height:40px;
+    border: none;
+    color: white;
+    background: #e77267;
+}
+/*CCSTranstion on-enter on-leave*/
+.fade-appear{
+    opacity: 0;
+    transform: scale(0.3); 
+}
+.fade-appear.fade-appear-active{
+    opacity:1;
+    transform: scale(1);
+    transition: all 300ms linear;
+}
+.fade-enter{
+    opacity: 0;
+    transform: scale(0); 
+}
+.fade-enter.fade-enter-active{
+    opacity:1;
+    transform: scale(1);
+    transition: all 300ms linear;
+}
+.fade-leave{
+    opacity: 1;
+    transform: scale(1);
+}
+.fade-leave.fade-leave-active{
+    opacity:0;
+    transform: scale(0); 
+    transition: all 0.3s linear;
+}
+.fade-exit{
+    opacity: 1;
+    transform: scale(1);
+}
+.fade-exit.fade-exit-active{
+    opacity:0;
+    transform: scale(0); 
+    transition: all 0.3s linear;
+}
+
+
+
+
+
+
+/*FAB STYLING*/
 
 .add-button{
     background: red;
 }
+
+.fab-container{
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.fab-icon-holder, .fab-icon-menu{
+    width: 50px;
+    height: 50px;
+    border-radius: 20%;
+    background: #016fb9;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+
+}
+
+.fab-icon-holder-add{
+    width: 50px;
+    height: 50px;
+    border-radius: 20%;
+    background: green;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+
+}
+
+.fab-icon-holder:hover, .fab-icon-holder-add:hover{
+    opacity: 0.8;
+}
+
+.fab-icon-holder i,.fab-icon-menu i, .fab-icon-holder-add i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    font-size: 25px;
+    color: white;
+}
+
+.fab{
+    border: none;
+    width: 60px;
+    height: 60px;
+    background: #d23f32;
+}
+
+@keyframes example {
+  from {transform:scale(0);}
+  to {transform:scale(1);}
+}
+
+.fab-options{
+    list-style-type: none;
+    margin: 0;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    opacity: 1;
+    animation: example 0.5s;
+    transform-origin: 85% bottom;
+}
+.fab-add{
+    margin: 0;
+    position: absolute;
+    bottom: -65px;
+    right: 70px;
+    opacity: 1;
+    transform-origin: 85% bottom;
+}
+
+
+.fab-options li{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+.fab-label {
+    padding: 2px 5px;
+    align-self: center;
+    user-select: none;
+    white-space: nowrap;
+    border-radius: 3px;
+    font-size: 16px;
+    background: #666666;
+    color: white;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  
+    .main-wrapper{
+       width: 400px;
+        margin: 20px auto;
+        display: flex;
+        flex-wrap: wrap; 
+    }
+
+    .fab-container{
+        position: fixed;
+        bottom: 50px;
+        right: 30px;
+        z-index: 999;
+        cursor: pointer;
+    }
+    .fab{
+        width: 60px;
+        height: 60px;
+        background: #03d7fd;
+        opacity: 1;
+    }
+    .fab-icon-holder:hover, .fab-icon-holder-add:hover{
+        opacity: 0.6;
+    }
+    .fab-icon-menu{
+         opacity: 1;
+    }
+}   

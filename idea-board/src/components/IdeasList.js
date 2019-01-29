@@ -1,23 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import PropTypes from 'prop-types'
 import IdeaCard from 'components/IdeaCard';
 import { deleteIdea } from 'actions'
 import { getVisibleIdeas } from 'selectors'
-import { visibilityFilter } from 'reducers/visibilityFilter';
+import * as types from 'actions/types'
+
+
+const FILTER_TITLES = {
+    [types.BY_DATE]: 'Ideas by Latest',
+    [types.BY_TITLE]: 'Ideas by Title',
+    [types.SHOW_ALL]: 'All your cool ideas'
+}
 
 class IdeasList extends Component {
 
     handleDelete = (id) =>{
-        this.props.deleteIdea(id)
+       this.props.deleteIdea(id)    
     }
 
     renderIdeas = (filteredIdeas) => 
         (
             filteredIdeas.map(idea => 
-                <section key={idea.id}>
-                    <IdeaCard idea={idea} handleDelete={this.handleDelete}/>  
-                </section>    
+                
+                    <div key={idea.id} className='card-wrapper'>         
+                        <IdeaCard idea={idea} handleDelete={this.handleDelete}/>         
+                    </div> 
+               
             )
         )
     
@@ -26,10 +36,20 @@ class IdeasList extends Component {
         const { filteredIdeas, visibilityFilter } = this.props
         return (
         <div>
-            <h1>{visibilityFilter}</h1>
-            <ul>
-                {this.renderIdeas(filteredIdeas)}
-            </ul>
+            <h1 className='header'>{FILTER_TITLES[visibilityFilter]}</h1>
+                
+                <ul className='main-wrapper'>
+                    <ReactCSSTransitionGroup
+                        transitionName='fade' 
+                        transitionEnterTimeout={500} 
+                        transitionLeaveTimeout={500}  
+                    >
+                        {this.renderIdeas(filteredIdeas)}
+                    </ReactCSSTransitionGroup> 
+                </ul>
+                
+           
+            
         </div>
     )
   }

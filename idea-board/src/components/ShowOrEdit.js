@@ -32,23 +32,25 @@ class ShowOrEdit extends Component {
 
     /*  140 chars sample
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text every.
+         style={{'cursor':'pointer'}} for mobile Safari onClick support
     */ 
 
     render(){
         return (
-            <div>
+            <div style={{'cursor':'pointer'}} className={`${this.props.name}-wrapper`}>
                 {this.state.editing ? 
                     <textarea type='text'
-                        rows={4}
-                        cols={20}
-                        maxLength={140}
+                        className='text-editing'
+                        rows={this.props.name === 'title' ? 1:30}
+                        cols={36}
+                        maxLength={this.props.name === 'title' ? 35:140}
                         value={this.state.value}
                         onBlur={this.handleEditingDone}
                         onChange={this.handleEditingChange}
                         autoFocus="true"
                     />
                     :
-                    <div onDoubleClick={this.handleEditing}>
+                    <div className={`${this.props.name}-label`} onClick={this.handleEditing}>
                         <label>
                             {this.state.value}
                         </label>

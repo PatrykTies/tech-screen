@@ -4,15 +4,25 @@ import PropTypes from 'prop-types'
 import * as actions from 'actions'
 import * as types from 'actions/types'
 import FilterButton from 'components/FilterButton'
-import {timeStamp} from 'utils/dateParser'
+
 
 
 const FILTER_TITLES = {
-    [types.BY_DATE]: 'BY DATE',
-    [types.BY_TITLE]: 'BY TITLE'
+    [types.BY_DATE]: 'Sort by Latest',
+    [types.BY_TITLE]: 'Sort by Title',
+    [types.SHOW_ALL]: 'Reset Filter'
+}
+const FILTER_ICONS = {
+    [types.BY_DATE]: 'fas fa-history',
+    [types.BY_TITLE]: 'fas fa-sort-alpha-down',
+    [types.SHOW_ALL]: 'fas fa-list-ul'
 }
 
 class IdeasAddAndFilter extends Component {
+
+    state={
+        isMenuActive: false,
+    }
 
     handleClick = () => { 
        
@@ -25,18 +35,45 @@ class IdeasAddAndFilter extends Component {
         this.props.addIdea(initialValues)
     }
 
+    toggleMenu = (e) => {
+        e.preventDefault()
+        this.setState(   
+            {isMenuActive: !this.state.isMenuActive}
+        )
+        
+    }
+
     render() {
+       
         return (
-        <div>
-            <button className='add-button' onClick={this.handleClick}>ADD IDEA</button>
-            {Object.keys(FILTER_TITLES).map(filter => (
-                    <div key={filter}>
-                        <FilterButton filter={filter}>
-                            {FILTER_TITLES[filter]}
-                        </FilterButton>
-                    </div>
-                )
-            )}
+        <div className='fab-container'>
+
+            <button className='fab fab-icon-menu' onClick={this.toggleMenu}>
+                    <i className='fas fa-bars'></i>
+            </button>
+                
+
+                {this.state.isMenuActive ?
+                
+                    <ul className='fab-options'>
+                        <div className='fab-add'>
+                            <span className='fab-label'>ADD</span>
+                            <button className='fas fab-icon-holder-add' onClick={this.handleClick}>
+                            <i className='fas fa-plus-square'></i></button>
+                        </div>
+                        {Object.keys(FILTER_TITLES).map(filter => (
+                            <li key={filter}>
+                                <span className='fab-label'>{FILTER_TITLES[filter]}</span>
+                                <FilterButton filter={filter}>  
+                                    <i className={FILTER_ICONS[filter]}></i>
+                                </FilterButton>
+                            </li>
+                        ))}
+                    </ul>
+                    :''
+                       
+                }
+             
         </div>
         )
     }
@@ -47,3 +84,7 @@ IdeasAddAndFilter.propTypes = {
 }
 
 export default connect(null, actions)(IdeasAddAndFilter);
+
+{/* <FilterButton filter={filter}>
+    {FILTER_TITLES[filter]}
+</FilterButton> */}

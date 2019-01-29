@@ -31,15 +31,15 @@ class IdeaCard extends Component{
         const { idea } = this.props; 
 
         return (
-            <li> 
+            <li className='content-wrapper'> 
                 <ShowOrEdit name='title' label={idea.title || ''} sendValueUp={this.getInputValue}/>
                 <br />
                 <ShowOrEdit name='description' label={idea.description || ''} sendValueUp={this.getInputValue}/>
                 <br />
-                {dateParser(idea.dateCreated)}
+                <h5 className='timestamp-wrapper'>Last updated at: {dateParser(idea.dateCreated)}</h5>
                 <button className='delete-btn' 
                     onClick={this.props.handleDelete.bind(null,idea.id)}>
-                    [X]
+                    REMOVE
                 </button> 
             </li>
         )
